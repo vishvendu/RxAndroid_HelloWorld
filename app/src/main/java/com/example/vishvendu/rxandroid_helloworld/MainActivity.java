@@ -12,8 +12,8 @@ import io.reactivex.disposables.Disposable;
 
 public class MainActivity extends AppCompatActivity {
 
-    Observable<Integer> integerObservable;
-    Observer<Integer> integerObserver;
+    Observable<String> integerObservable;
+    Observer<String> integerObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +25,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void CreateObserver() {
 
-        integerObserver = new Observer<Integer>() {
+        integerObserver = new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
                 Log.e("", "onSubscribe: ");
             }
 
             @Override
-            public void onNext(Integer value) {
+            public void onNext(String value) {
                 Log.e("", "onNext: " + value);
             }
 
@@ -54,18 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void CreateObservable() {
 
-        integerObservable = Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+         integerObservable = Observable.just("Hello World!");
 
-                e.onNext(1);
-                e.onNext(2);
-                e.onNext(3);
-                e.onNext(4);
 
-                e.onComplete();
-            }
-        });
 
     }
 }
